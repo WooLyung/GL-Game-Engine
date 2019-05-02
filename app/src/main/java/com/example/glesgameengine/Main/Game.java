@@ -1,4 +1,4 @@
-package com.example.glesgameengine;
+package com.example.glesgameengine.Main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,10 +7,12 @@ import android.view.WindowManager;
 import com.example.glesgameengine.GL.GLRenderer;
 import com.example.glesgameengine.GL.GLView;
 
-public class MainActivity extends AppCompatActivity
+public class Game extends AppCompatActivity
 {
     GLView view;
     GLRenderer renderer;
+    Thread thread;
+    public static Engine engine;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -20,6 +22,10 @@ public class MainActivity extends AppCompatActivity
 
         renderer = new GLRenderer(this);
         view = new GLView(this, renderer);
+        thread = new Thread(new MainLoop());
+        engine = new Engine();
+
         setContentView(view);
+        thread.start();
     }
 }
