@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.glesgameengine.Camera;
 import com.example.glesgameengine.GameObject.TestObject;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class TestScene extends Scene
 {
     @Override
@@ -17,13 +19,17 @@ public class TestScene extends Scene
     public void update()
     {
         super.update();
-
-        Log.i("TestScene", "Running");
     }
 
     @Override
     public void finish()
     {
 
+    }
+
+    @Override
+    public void render(GL10 gl)
+    {
+        super.render(gl);
     }
 }

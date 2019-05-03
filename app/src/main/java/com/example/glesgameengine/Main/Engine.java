@@ -1,6 +1,10 @@
 package com.example.glesgameengine.Main;
 
+import android.util.Log;
+
 import com.example.glesgameengine.Scene.*;
+
+import javax.microedition.khronos.opengles.GL10;
 
 public class Engine
 {
@@ -20,6 +24,11 @@ public class Engine
     public void update()
     {
         nowScene.update();
+    }
+
+    public void render(GL10 gl)
+    {
+        nowScene.render(gl);
     }
 
     public void finish()
