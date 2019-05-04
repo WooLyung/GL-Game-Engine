@@ -8,6 +8,11 @@ import android.view.MotionEvent;
 
 public class GLView extends GLSurfaceView
 {
+    public static double defaultWidth;
+    public static double defaultHeight;
+    public static double nowWidth;
+    public static double nowHeight;
+
     public GLView(Context context, Renderer renderer)
     {
         super(context);

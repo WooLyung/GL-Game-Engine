@@ -7,13 +7,13 @@ public class TransformComponent extends Component
     @Override
     public void start()
     {
-
+        setName("transform");
     }
 
     @Override
     public void update()
     {
-        Log.i("Transform", "Running");
+
     }
 
     @Override

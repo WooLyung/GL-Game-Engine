@@ -9,8 +9,8 @@ public class MainLoop implements Runnable
         {
             try
             {
-                Thread.sleep(50);
-                Game.engine.update();
+                Thread.sleep(50); // 최대 프레임 제한
+                Game.engine.update(); // 엔진을 업데이트
             }
             catch (InterruptedException e)
             {
