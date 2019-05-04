@@ -31,14 +31,13 @@ public class Game extends AppCompatActivity
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        super.onCreate(savedInstanceState); // 조명 항상켜기
         try { // socketio로 서버 연결
             socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
         } catch (URISyntaxException e) { // 서버 주소 문법 오류시
             e.printStackTrace();
         }
 
-        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState); // 조명 항상켜기
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         // 화면의 크기 값을 저장
