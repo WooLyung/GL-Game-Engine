@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.glesgameengine.Component.Component;
 import com.example.glesgameengine.Component.RendererComponent.RendererComponent;
 import com.example.glesgameengine.Component.RendererComponent.SpriteRenderer;
+import com.example.glesgameengine.GL.GLRenderer;
 
 import java.util.ArrayList;
 
@@ -73,9 +74,9 @@ abstract public class GameObject
         }
     }
 
-    public void render(GL10 gl)
+    public void render()
     {
-        renderer.render(gl);
+        GLRenderer.renderTargets.add(renderer);
     }
 
     public void finish()

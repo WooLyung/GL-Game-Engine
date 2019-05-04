@@ -10,6 +10,7 @@ import java.nio.ShortBuffer;
 public class ImageData
 {
     private String name;
+    private int imgCode;
 
     private FloatBuffer vertexBuffer;
     private ShortBuffer indexBuffer;
@@ -130,5 +131,13 @@ public class ImageData
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getImgCode() {
+        return imgCode;
+    }
+
+    public void setImgCode(int imgCode) {
+        this.imgCode = imgCode;
     }
 }

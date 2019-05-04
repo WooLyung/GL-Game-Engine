@@ -6,15 +6,15 @@ import com.example.glesgameengine.Component.RendererComponent.SpriteRenderer;
 import com.example.glesgameengine.Component.TransformComponent;
 import com.example.glesgameengine.GL.GLRenderer;
 
-public class TestObject extends GameObject
+public class TestObject2 extends GameObject
 {
     @Override
     public void start()
     {
         attachComponent(new TransformComponent());
         attachComponent(new SpriteRenderer());
-        renderer.image[0] = GLRenderer.findImage("img2");
-        renderer.setZ_index(3);
+        renderer.image[0] = GLRenderer.findImage("img1");
+        renderer.setZ_index(2);
     }
 
     @Override

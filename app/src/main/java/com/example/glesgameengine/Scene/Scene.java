@@ -25,11 +25,11 @@ abstract public class Scene
         }
     }
 
-    public void render(GL10 gl)
+    public void render()
     {
         for (GameObject gameObject : objs)
         {
-            gameObject.render(gl);
+            gameObject.render();
         }
     }
 

@@ -26,9 +26,9 @@ public class Engine
         nowScene.update();
     }
 
-    public void render(GL10 gl)
+    public void render()
     {
-        nowScene.render(gl);
+        nowScene.render();
     }
 
     public void finish()
