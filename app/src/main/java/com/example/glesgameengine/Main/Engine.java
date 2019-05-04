@@ -1,10 +1,6 @@
 package com.example.glesgameengine.Main;
 
-import android.util.Log;
-
-import com.example.glesgameengine.Scene.*;
-
-import javax.microedition.khronos.opengles.GL10;
+import com.example.glesgameengine.GameSystem.Scene.*;
 
 public class Engine
 {

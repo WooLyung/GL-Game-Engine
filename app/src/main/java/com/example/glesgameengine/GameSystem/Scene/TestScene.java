@@ -1,12 +1,7 @@
-package com.example.glesgameengine.Scene;
+package com.example.glesgameengine.GameSystem.Scene;
 
-import android.util.Log;
-
-import com.example.glesgameengine.Camera;
-import com.example.glesgameengine.GameObject.TestObject;
-import com.example.glesgameengine.GameObject.TestObject2;
-
-import javax.microedition.khronos.opengles.GL10;
+import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject;
+import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject2;
 
 public class TestScene extends Scene
 {
@@ -15,6 +10,10 @@ public class TestScene extends Scene
     {
         objs.add(new TestObject());
         objs.add(new TestObject2());
+
+        camera.position.x = 2;
+        camera.zoom.x = 0.5f;
+        camera.zoom.y = 0.5f;
     }
 
     @Override

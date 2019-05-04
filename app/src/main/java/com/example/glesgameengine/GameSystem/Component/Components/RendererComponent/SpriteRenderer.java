@@ -1,9 +1,6 @@
-package com.example.glesgameengine.Component.RendererComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent;
 
-import android.util.Log;
-
-import com.example.glesgameengine.GL.GLRenderer;
-import com.example.glesgameengine.Main.Game;
+import com.example.glesgameengine.GraphicSystem.GLRenderer;
 
 import javax.microedition.khronos.opengles.GL10;
 

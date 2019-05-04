@@ -1,6 +1,6 @@
-package com.example.glesgameengine.Component.RendererComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent;
 
-import com.example.glesgameengine.Component.Component;
+import com.example.glesgameengine.GameSystem.Component.Component;
 
 import javax.microedition.khronos.opengles.GL10;
 

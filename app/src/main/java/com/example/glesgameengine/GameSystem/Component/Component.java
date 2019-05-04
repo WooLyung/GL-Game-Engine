@@ -1,4 +1,4 @@
-package com.example.glesgameengine.Component;
+package com.example.glesgameengine.GameSystem.Component;
 
 abstract public class Component
 {

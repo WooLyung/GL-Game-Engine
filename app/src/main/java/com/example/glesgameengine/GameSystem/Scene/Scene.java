@@ -1,19 +1,14 @@
-package com.example.glesgameengine.Scene;
+package com.example.glesgameengine.GameSystem.Scene;
 
-import android.util.Log;
-
-import com.example.glesgameengine.Camera;
-import com.example.glesgameengine.GameObject.GameObject;
-import com.example.glesgameengine.Main.Game;
+import com.example.glesgameengine.GameSystem.Camera;
+import com.example.glesgameengine.GameSystem.GameObject.GameObject;
 
 import java.util.ArrayList;
 
-import javax.microedition.khronos.opengles.GL10;
-
 abstract public class Scene
 {
-    ArrayList<GameObject> objs = new ArrayList<GameObject>();
-    Camera mainCamera = null;
+    public ArrayList<GameObject> objs = new ArrayList<GameObject>();
+    public Camera camera = new Camera();
 
     abstract public void start();
 

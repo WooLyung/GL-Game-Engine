@@ -7,14 +7,13 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.example.glesgameengine.GL.GLRenderer;
-import com.example.glesgameengine.GL.GLView;
+import com.example.glesgameengine.GraphicSystem.GLRenderer;
+import com.example.glesgameengine.GraphicSystem.GLView;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
 import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 
 public class Game extends AppCompatActivity
 {
@@ -23,14 +22,21 @@ public class Game extends AppCompatActivity
     GLRenderer renderer;
     Thread thread;
     String TAG = "MainActivity";
+
+    public static long preTime;
+
     public static Engine engine;
     public static int screenWidth;
     public static int screenHeight;
+    public static float deltaTime;
     public static double screenDiagonal;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        // 시간 초기화
+        preTime = System.currentTimeMillis();
+
         try { // socketio로 서버 연결
             socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
         } catch (URISyntaxException e) { // 서버 주소 문법 오류시

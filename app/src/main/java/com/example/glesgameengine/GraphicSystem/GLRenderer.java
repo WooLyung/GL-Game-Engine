@@ -1,4 +1,4 @@
-package com.example.glesgameengine.GL;
+package com.example.glesgameengine.GraphicSystem;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -7,9 +7,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-import com.example.glesgameengine.Component.RendererComponent.RendererComponent;
-import com.example.glesgameengine.GameObject.GameObject;
-import com.example.glesgameengine.ImageData;
+import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.Main.Game;
 import com.example.glesgameengine.R;
 
@@ -40,12 +38,9 @@ public class GLRenderer implements GLSurfaceView.Renderer
     public static int findImage(String name)
     {
         int index = 0;
-        Log.i("findImage", "" + imageDatas.size() );
 
         for (ImageData imgData : imageDatas)
         {
-            Log.i("findImage", imgData.getName());
-
             if (imgData.getName().equals(name))
                 return index;
             index++;
@@ -70,9 +65,18 @@ public class GLRenderer implements GLSurfaceView.Renderer
         // 렌더 버퍼를 지움
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
+        // 카메라의 정보를 행렬 스택에 담음
+        gl.glLoadIdentity();
+        gl.glScalef(Game.engine.nowScene.camera.zoom.x, Game.engine.nowScene.camera.zoom.y, 1);
+        gl.glTranslatef(Game.engine.nowScene.camera.position.x / (float)GLView.defaultWidth * 2, Game.engine.nowScene.camera.position.y / (float)GLView.defaultHeight * 2, 1);
+        gl.glRotatef(Game.engine.nowScene.camera.angle, 0, 0, 1);
+        gl.glPushMatrix();
+        gl.glLoadIdentity();
+
         // 렌더 타겟에 모든 렌더링이 될 오브젝트의 렌더러를 받아옴
         renderTargets.clear();
         Game.engine.render();
+
         // 렌더러들의 z-index에 따라 정렬
         Collections.sort(renderTargets, new Comparator<RendererComponent>() {
             @Override
@@ -80,10 +84,17 @@ public class GLRenderer implements GLSurfaceView.Renderer
                 return r1.getZ_index() - r2.getZ_index();
             }
         });
+
         // 정렬된 순서에 따라서 실제로 렌더링함
         for(RendererComponent rendererComponent : renderTargets)
         {
+            gl.glLoadIdentity();
+            gl.glPopMatrix();
+            gl.glPushMatrix();
             rendererComponent.render(gl);
+            gl.glLoadIdentity();
+
+            gl.glMatrix
         }
     }
 
@@ -112,16 +123,28 @@ public class GLRenderer implements GLSurfaceView.Renderer
             gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
             bitmap = BitmapFactory.decodeResource(context.getResources(), imageDatas.get(i).getImgCode());
             GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
+
+            // 이미지 크기를 저장
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeResource(context.getResources(), imageDatas.get(i).getImgCode(), options);
+            imageDatas.get(i).setWidth(options.outWidth);
+            imageDatas.get(i).setHeight(options.outHeight);
+
             bitmap.recycle();
 
-            // 이미지 정보의 버텍스 버퍼를 화면 크기에 맞도록 조절
+            // 이미지 정보의 버텍스 버퍼를 화면 크기와 이미지 크기에 맞도록 조절
             float[] vertices = imageDatas.get(i).getVertices();
             for (int j = 0; j < vertices.length; j++)
             {
-                if (j % 2 == 0)
+                if (j % 2 == 0) {
                     vertices[j] /= GLView.defaultWidth;
-                else
+                    vertices[j] *= imageDatas.get(i).getHeight() / 100f;
+                }
+                else {
                     vertices[j] /= GLView.defaultHeight;
+                    vertices[j] *= imageDatas.get(i).getWidth() / 100f;
+                }
             }
             imageDatas.get(i).setVertices(vertices);
         }

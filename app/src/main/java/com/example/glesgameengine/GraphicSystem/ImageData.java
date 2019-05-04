@@ -1,4 +1,4 @@
-package com.example.glesgameengine;
+package com.example.glesgameengine.GraphicSystem;
 
 import android.media.Image;
 
@@ -11,6 +11,8 @@ public class ImageData
 {
     private String name;
     private int imgCode;
+    private int width;
+    private int height;
 
     private FloatBuffer vertexBuffer;
     private ShortBuffer indexBuffer;
@@ -151,5 +153,21 @@ public class ImageData
 
     public void setImgCode(int imgCode) {
         this.imgCode = imgCode;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }
