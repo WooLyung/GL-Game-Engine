@@ -6,6 +6,6 @@ import com.example.glesgameengine.Types.Vector;
 abstract public class TransformComponent extends Component
 {
     public Vector position = new Vector();
-    public Vector scale = new Vector();
-    public Vector angle = new Vector();
+    public Vector scale = new Vector(1, 1);
+    public float angle = 0;
 }

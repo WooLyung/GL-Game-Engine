@@ -5,6 +5,7 @@ import com.example.glesgameengine.GameSystem.Component.Components.TransformCompo
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.glesgameengine.GraphicSystem.GLRenderer;
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
+import com.example.glesgameengine.Main.Game;
 
 public class TestObject extends GameObject
 {
@@ -13,8 +14,13 @@ public class TestObject extends GameObject
     {
         attachComponent(new Transform());
         attachComponent(new SpriteRenderer());
-        renderer.image[0] = GLRenderer.findImage("img2");
+        renderer.image[0] = GLRenderer.findImage("circle");
         renderer.setZ_index(0);
+
+        transform.position.x = 2;
+        transform.angle = 30;
+        transform.scale.x = 0.9f;
+        transform.scale.y = 0.9f;
     }
 
     @Override

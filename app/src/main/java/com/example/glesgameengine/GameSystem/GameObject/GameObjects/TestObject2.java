@@ -1,10 +1,13 @@
 package com.example.glesgameengine.GameSystem.GameObject.GameObjects;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.SpriteRenderer;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.TransformComponent;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.glesgameengine.GraphicSystem.GLRenderer;
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
+import com.example.glesgameengine.Main.Game;
 
 public class TestObject2 extends GameObject
 {

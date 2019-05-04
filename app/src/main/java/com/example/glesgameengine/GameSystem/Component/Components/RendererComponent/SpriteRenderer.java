@@ -1,6 +1,9 @@
 package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GraphicSystem.GLRenderer;
+import com.example.glesgameengine.GraphicSystem.GLView;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -9,6 +12,8 @@ public class SpriteRenderer extends RendererComponent
     @Override
     public void render(GL10 gl)
     {
+        super.render(gl);
+
         // 블렌드를 허용
         gl.glEnable(GL10.GL_BLEND);
 
@@ -35,6 +40,10 @@ public class SpriteRenderer extends RendererComponent
         gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
         gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
         gl.glDisable(GL10.GL_BLEND);
+
+        // 렌더링 마무리
+        gl.glPopMatrix();
+        gl.glLoadIdentity();
     }
 
     @Override

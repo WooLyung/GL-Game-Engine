@@ -57,6 +57,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
         addImage(R.drawable.image, "img1");
         addImage(R.drawable.test1, "img2");
+        addImage(R.drawable.circle, "circle");
     }
 
     @Override
@@ -67,9 +68,9 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
         // 카메라의 정보를 행렬 스택에 담음
         gl.glLoadIdentity();
-        gl.glScalef(Game.engine.nowScene.camera.zoom.x, Game.engine.nowScene.camera.zoom.y, 1);
-        gl.glTranslatef(Game.engine.nowScene.camera.position.x / (float)GLView.defaultWidth * 2, Game.engine.nowScene.camera.position.y / (float)GLView.defaultHeight * 2, 1);
+        gl.glScalef(Game.engine.nowScene.camera.zoom.x / (float)GLView.defaultWidth, Game.engine.nowScene.camera.zoom.y / (float)GLView.defaultHeight, 1);
         gl.glRotatef(Game.engine.nowScene.camera.angle, 0, 0, 1);
+        gl.glTranslatef(-Game.engine.nowScene.camera.position.x, -Game.engine.nowScene.camera.position.y, 1);
         gl.glPushMatrix();
         gl.glLoadIdentity();
 
@@ -88,14 +89,11 @@ public class GLRenderer implements GLSurfaceView.Renderer
         // 정렬된 순서에 따라서 실제로 렌더링함
         for(RendererComponent rendererComponent : renderTargets)
         {
-            gl.glLoadIdentity();
-            gl.glPopMatrix();
-            gl.glPushMatrix();
             rendererComponent.render(gl);
-            gl.glLoadIdentity();
-
-            gl.glMatrix
         }
+
+        gl.glPopMatrix();
+        gl.glLoadIdentity();
     }
 
     @Override
@@ -138,11 +136,11 @@ public class GLRenderer implements GLSurfaceView.Renderer
             for (int j = 0; j < vertices.length; j++)
             {
                 if (j % 2 == 0) {
-                    vertices[j] /= GLView.defaultWidth;
+                    //vertices[j] /= GLView.defaultWidth;
                     vertices[j] *= imageDatas.get(i).getHeight() / 100f;
                 }
                 else {
-                    vertices[j] /= GLView.defaultHeight;
+                    //vertices[j] /= GLView.defaultHeight;
                     vertices[j] *= imageDatas.get(i).getWidth() / 100f;
                 }
             }
