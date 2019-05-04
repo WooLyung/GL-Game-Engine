@@ -14,7 +14,7 @@ public class TestObject extends GameObject
         attachComponent(new TransformComponent());
         attachComponent(new SpriteRenderer());
         renderer.image[0] = GLRenderer.findImage("img2");
-        renderer.setZ_index(3);
+        renderer.setZ_index(0);
     }
 
     @Override

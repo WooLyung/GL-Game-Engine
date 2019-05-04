@@ -27,6 +27,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
     public static ArrayList<RendererComponent> renderTargets = new ArrayList<RendererComponent>();
     private Context context;
 
+    // 이미지에 대한 정보를 저장
     private void addImage(int image, String name)
     {
         ImageData imgData = new ImageData();
@@ -35,6 +36,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         imageDatas.add(imgData);
     }
 
+    // 이미지 정보 목록에서 이름에 해당하는 이미지의 인덱스값을 반환
     public static int findImage(String name)
     {
         int index = 0;
@@ -53,9 +55,11 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
     public GLRenderer(Context context)
     {
+        // 변수 초기화
         imageDatas = new ArrayList<ImageData>();
         this.context = context;
 
+        // 이미지 정보 목록에 각 이미지들을 미리 추가함
         addImage(R.drawable.image, "img1");
         addImage(R.drawable.test1, "img2");
     }
@@ -63,16 +67,20 @@ public class GLRenderer implements GLSurfaceView.Renderer
     @Override
     public void onDrawFrame(GL10 gl)
     {
+        // 렌더 버퍼를 지움
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
+        // 렌더 타겟에 모든 렌더링이 될 오브젝트의 렌더러를 받아옴
         renderTargets.clear();
         Game.engine.render();
+        // 렌더러들의 z-index에 따라 정렬
         Collections.sort(renderTargets, new Comparator<RendererComponent>() {
             @Override
             public int compare(RendererComponent r1, RendererComponent r2) {
                 return r1.getZ_index() - r2.getZ_index();
             }
         });
+        // 정렬된 순서에 따라서 실제로 렌더링함
         for(RendererComponent rendererComponent : renderTargets)
         {
             rendererComponent.render(gl);
@@ -88,6 +96,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig arg1)
     {
+        // 렌더러의 여러 값들을 초기화
         gl.glClearColor(1f, 1f, 1f, 0.5f);
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
         gl.glEnable(GL10.GL_TEXTURE_2D);
@@ -95,17 +104,26 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
         Bitmap bitmap;
 
-        int index = 0;
-        for (ImageData imgData : imageDatas)
+        for (int i = 0; i < imageDatas.size(); i++)
         {
-            gl.glBindTexture(GL10.GL_TEXTURE_2D, imageCode[index]);
+            // 이미지 정보 목록에 실제 이미지를 비트맵으로 저장
+            gl.glBindTexture(GL10.GL_TEXTURE_2D, imageCode[i]);
             gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
             gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-            bitmap = BitmapFactory.decodeResource(context.getResources(), imgData.getImgCode());
+            bitmap = BitmapFactory.decodeResource(context.getResources(), imageDatas.get(i).getImgCode());
             GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, bitmap, 0);
             bitmap.recycle();
 
-            index++;
+            // 이미지 정보의 버텍스 버퍼를 화면 크기에 맞도록 조절
+            float[] vertices = imageDatas.get(i).getVertices();
+            for (int j = 0; j < vertices.length; j++)
+            {
+                if (j % 2 == 0)
+                    vertices[j] /= GLView.defaultWidth;
+                else
+                    vertices[j] /= GLView.defaultHeight;
+            }
+            imageDatas.get(i).setVertices(vertices);
         }
     }
 }
