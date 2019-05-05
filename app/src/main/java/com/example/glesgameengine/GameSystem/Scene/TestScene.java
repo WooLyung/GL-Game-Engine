@@ -4,6 +4,8 @@ import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject;
 import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject2;
 import com.example.glesgameengine.Main.Game;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class TestScene extends Scene
 {
     @Override
@@ -21,7 +23,7 @@ public class TestScene extends Scene
             t2.appendChild(t1);
         }
 
-        camera.position.x = 2;
+        camera.position.x = 1.5f;
     }
 
     @Override
@@ -39,8 +41,8 @@ public class TestScene extends Scene
     }
 
     @Override
-    public void render()
+    public void render(GL10 gl)
     {
-        super.render();
+        super.render(gl);
     }
 }

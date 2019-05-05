@@ -7,6 +7,8 @@ import com.example.glesgameengine.GraphicSystem.GLRenderer;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL10;
+
 abstract public class GameObject
 {
     protected RendererComponent renderer;
@@ -121,10 +123,10 @@ abstract public class GameObject
         }
     }
 
-    public void render()
+    public void render(GL10 gl)
     {
         if (renderer != null)
-            GLRenderer.renderTargets.add(renderer);
+            renderer.render(gl);
     }
 
     public void finish()

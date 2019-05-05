@@ -2,6 +2,8 @@ package com.example.glesgameengine.Main;
 
 import com.example.glesgameengine.GameSystem.Scene.*;
 
+import javax.microedition.khronos.opengles.GL10;
+
 public class Engine
 {
     public Scene nowScene;
@@ -22,9 +24,9 @@ public class Engine
         nowScene.update();
     }
 
-    public void render()
+    public void render(GL10 gl)
     {
-        nowScene.render();
+        nowScene.render(gl);
     }
 
     public void finish()

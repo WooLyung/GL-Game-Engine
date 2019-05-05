@@ -14,7 +14,7 @@ public class MainLoop implements Runnable
                 Game.deltaTime = (System.currentTimeMillis() - Game.preTime) / 1000f; // 델타 타임을 구함
                 Game.preTime = System.currentTimeMillis();
 
-                Thread.sleep(50); // 최대 프레임 제한
+                Thread.sleep(20); // 최대 프레임 제한
                 Game.engine.update(); // 엔진을 업데이트
             }
             catch (InterruptedException e)

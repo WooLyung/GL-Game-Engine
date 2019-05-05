@@ -19,7 +19,7 @@ abstract public class RendererComponent extends Component
         // transform에 따른 변환 행렬을 행렬 스택에 쌓음
         gl.glPopMatrix();
         gl.glPushMatrix();
-        gl.glTranslatef(object.getTransform().position.x, object.getTransform().position.y, 0);
+        gl.glTranslatef(object.getTransform().position.x, object.getTransform().position.y, getZ_index() / 100.f);
         gl.glScalef(object.getTransform().scale.x, object.getTransform().scale.y, 1);
         gl.glRotatef(object.getTransform().angle, 0, 0, 1);
         gl.glPushMatrix();

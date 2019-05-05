@@ -5,6 +5,8 @@ import com.example.glesgameengine.GameSystem.GameObject.GameObject;
 
 import java.util.ArrayList;
 
+import javax.microedition.khronos.opengles.GL10;
+
 abstract public class Scene
 {
     public ArrayList<GameObject> objs = new ArrayList<GameObject>();
@@ -20,11 +22,11 @@ abstract public class Scene
         }
     }
 
-    public void render()
+    public void render(GL10 gl)
     {
         for (GameObject gameObject : objs)
         {
-            gameObject.render();
+            gameObject.render(gl);
         }
     }
 

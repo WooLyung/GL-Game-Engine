@@ -22,7 +22,6 @@ public class GLRenderer implements GLSurfaceView.Renderer
 {
     public static ArrayList<ImageData> imageDatas;
     public static int[] imageCode = new int[100];
-    public static ArrayList<RendererComponent> renderTargets = new ArrayList<RendererComponent>();
     private Context context;
 
     // 이미지에 대한 정보를 저장
@@ -57,7 +56,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
         addImage(R.drawable.image, "img1");
         addImage(R.drawable.test1, "img2");
-        addImage(R.drawable.circle, "circle");
+        addImage(R.drawable.circle2, "circle");
     }
 
     @Override
@@ -68,30 +67,16 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
         // 카메라의 정보를 행렬 스택에 담음
         gl.glLoadIdentity();
-        gl.glScalef(Game.engine.nowScene.camera.zoom.x / (float)GLView.defaultWidth, Game.engine.nowScene.camera.zoom.y / (float)GLView.defaultHeight, 1);
+        gl.glScalef(Game.engine.nowScene.camera.getZoomX() / (float)GLView.defaultWidth, Game.engine.nowScene.camera.getZoomY() / (float)GLView.defaultHeight, 1);
         gl.glRotatef(Game.engine.nowScene.camera.angle, 0, 0, 1);
-        gl.glTranslatef(-Game.engine.nowScene.camera.position.x, -Game.engine.nowScene.camera.position.y, 1);
+        gl.glTranslatef(-Game.engine.nowScene.camera.position.x, -Game.engine.nowScene.camera.position.y, 0);
         gl.glPushMatrix();
         gl.glLoadIdentity();
 
-        // 렌더 타겟에 모든 렌더링이 될 오브젝트의 렌더러를 받아옴
-        renderTargets.clear();
-        Game.engine.render();
+        // 렌더링
+        Game.engine.render(gl);
 
-        // 렌더러들의 z-index에 따라 정렬
-        Collections.sort(renderTargets, new Comparator<RendererComponent>() {
-            @Override
-            public int compare(RendererComponent r1, RendererComponent r2) {
-                return r1.getZ_index() - r2.getZ_index();
-            }
-        });
-
-        // 정렬된 순서에 따라서 실제로 렌더링함
-        for(RendererComponent rendererComponent : renderTargets)
-        {
-            rendererComponent.render(gl);
-        }
-
+        // 렌더링 마무리
         gl.glPopMatrix();
         gl.glLoadIdentity();
     }

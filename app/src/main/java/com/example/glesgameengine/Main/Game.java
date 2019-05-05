@@ -58,9 +58,6 @@ public class Game extends AppCompatActivity
         GLView.nowHeight = GLView.defaultHeight;
         GLView.nowWidth = GLView.defaultWidth;
 
-        Log.i("height", GLView.nowHeight + "");
-        Log.i("width", GLView.nowWidth + "");
-
         // 엔진의 베이스를 이루는 객체를 생성
         renderer = new GLRenderer(this); // 엔진의 모든 렌더링을 담당
         view = new GLView(this, renderer); // 렌더가 된 이미지를 출력하는 뷰

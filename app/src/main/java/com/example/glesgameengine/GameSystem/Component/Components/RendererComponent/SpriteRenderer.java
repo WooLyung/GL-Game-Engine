@@ -14,8 +14,9 @@ public class SpriteRenderer extends RendererComponent
     {
         super.render(gl);
 
-        // 블렌드를 허용
+        // 블렌드와 뎁스 버퍼 허용
         gl.glEnable(GL10.GL_BLEND);
+        gl.glEnable(GL10.GL_DEPTH_TEST);
 
         // 버텍스, 텍스쳐, 컬러, 인덱스 버퍼를 적용시킴
         gl.glFrontFace(GL10.GL_CW);
@@ -24,7 +25,7 @@ public class SpriteRenderer extends RendererComponent
         gl.glColorPointer(4, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(image[0]).getColorBuffer());
         gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(image[0]).getTextureBuffer());
 
-        // 옵션들을 허용
+        // 버퍼들을 허용
         gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
         gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
         gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
