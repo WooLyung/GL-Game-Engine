@@ -22,7 +22,8 @@ public class TestScene extends Scene
 
             t2.appendChild(t1);
         }
-
+        
+        objs.add(new TestObject2());
         camera.position.x = 1.5f;
     }
 

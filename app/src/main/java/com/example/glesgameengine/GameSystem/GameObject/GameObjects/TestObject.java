@@ -15,7 +15,7 @@ public class TestObject extends GameObject
         attachComponent(new Transform());
         attachComponent(new SpriteRenderer());
         renderer.image[0] = GLRenderer.findImage("circle");
-        renderer.setZ_index(-1);
+        renderer.setZ_index(1);
 
         transform.position.x = 1.5f;
         transform.angle = 30;

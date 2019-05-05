@@ -17,9 +17,11 @@ import java.util.Comparator;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+import javax.microedition.khronos.opengles.GL10;
 
 public class GLRenderer implements GLSurfaceView.Renderer
 {
+    public static ArrayList<RenderTarget> renderTargets;
     public static ArrayList<ImageData> imageDatas;
     public static int[] imageCode = new int[100];
     private Context context;
@@ -51,6 +53,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
     {
         // 변수 초기화
         imageDatas = new ArrayList<ImageData>();
+        renderTargets = new ArrayList<RenderTarget>();
         this.context = context;
 
         // 이미지 정보 목록에 각 이미지들을 미리 추가함
@@ -73,12 +76,55 @@ public class GLRenderer implements GLSurfaceView.Renderer
         gl.glPushMatrix();
         gl.glLoadIdentity();
 
-        // 렌더링
+        // 렌더 타겟에 렌더 대상들을 담음
+        renderTargets.clear();
         Game.engine.render(gl);
 
-        // 렌더링 마무리
+        // 행렬 스택 초기화
         gl.glPopMatrix();
         gl.glLoadIdentity();
+
+        // 렌더 타겟을 z-index에 따라 정렬
+        Collections.sort(renderTargets, new Comparator<RenderTarget>() {
+            @Override
+            public int compare(RenderTarget t1, RenderTarget t2) {
+                return (t1.z_index - t2.z_index) > 0 ? 1 : -1;
+            }
+        });
+
+        // 렌더링
+        for (RenderTarget renderTarget : renderTargets)
+        {
+            // 행렬을 불러옴
+            gl.glLoadIdentity();
+            gl.glMultMatrixf(renderTarget.matrix);
+
+            // 블렌드 허용
+            gl.glEnable(GL10.GL_BLEND);
+
+            // 버텍스, 텍스쳐, 컬러, 인덱스 버퍼를 적용시킴
+            gl.glVertexPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getVertexBuffer());
+            gl.glBindTexture(GL10.GL_TEXTURE_2D, GLRenderer.imageCode[renderTarget.imageCode]);
+            gl.glColorPointer(4, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getColorBuffer());
+            gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getTextureBuffer());
+
+            // 버퍼들을 허용
+            gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+            gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
+            gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+
+            // 알파 블렌드
+            gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+
+            // 실제 렌더링
+            gl.glDrawElements(GL10.GL_TRIANGLE_STRIP, GLRenderer.imageDatas.get(renderTarget.imageCode).getIndex().length, GL10.GL_UNSIGNED_SHORT, GLRenderer.imageDatas.get(renderTarget.imageCode).getIndexBuffer());
+
+            // 허용된 것을 다시 비허용
+            gl.glDisableClientState(GL10.GL_VERTEX_ARRAY);
+            gl.glDisableClientState(GL10.GL_COLOR_ARRAY);
+            gl.glDisableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+            gl.glDisable(GL10.GL_BLEND);
+        }
     }
 
     @Override
