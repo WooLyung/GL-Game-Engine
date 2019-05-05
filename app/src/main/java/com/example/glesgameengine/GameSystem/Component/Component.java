@@ -2,8 +2,8 @@ package com.example.glesgameengine.GameSystem.Component;
 
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
 
-abstract public class Component
-{
+abstract public class Component {
+
     String name = null;
     public GameObject object = null;
 
@@ -15,8 +15,7 @@ abstract public class Component
         this.name = name;
     }
 
-    public Component()
-    {
+    public Component() {
         start();
     }
 

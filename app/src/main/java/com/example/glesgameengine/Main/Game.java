@@ -3,20 +3,19 @@ package com.example.glesgameengine.Main;
 import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.example.glesgameengine.GraphicSystem.GLRenderer;
-import com.example.glesgameengine.GraphicSystem.GLView;
+import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
+import com.example.glesgameengine.GraphicSystem.GL.GLView;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
 import java.net.URISyntaxException;
 
 import io.socket.client.Socket;
 
-public class Game extends AppCompatActivity
-{
+public class Game extends AppCompatActivity {
+
     Socket socket;
     GLView view;
     GLRenderer renderer;
@@ -32,8 +31,7 @@ public class Game extends AppCompatActivity
     public static double screenDiagonal;
 
     @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
+    public void onCreate(Bundle savedInstanceState) {
         // 시간 초기화
         preTime = System.currentTimeMillis();
 

@@ -1,4 +1,4 @@
-package com.example.glesgameengine.GraphicSystem;
+package com.example.glesgameengine.GraphicSystem.GL;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;

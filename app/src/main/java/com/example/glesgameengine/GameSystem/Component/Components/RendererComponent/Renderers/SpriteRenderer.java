@@ -1,22 +1,18 @@
-package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers;
 
-import android.util.Log;
-
-import com.example.glesgameengine.GraphicSystem.GLRenderer;
-import com.example.glesgameengine.GraphicSystem.GLView;
+import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
+import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.RenderTarget;
 
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-public class SpriteRenderer extends RendererComponent
-{
+public class SpriteRenderer extends RendererComponent {
+
     @Override
-    public void render(GL10 gl)
-    {
+    public void render(GL10 gl) {
         super.render(gl);
 
         // 렌더 타겟을 추가
@@ -33,20 +29,16 @@ public class SpriteRenderer extends RendererComponent
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         setName("spriteRenderer");
         image = new int[1];
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
     }
 
     @Override
-    public void finish()
-    {
-
+    public void finish() {
     }
 }

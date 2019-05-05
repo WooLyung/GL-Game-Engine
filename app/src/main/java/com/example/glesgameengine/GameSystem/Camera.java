@@ -1,10 +1,10 @@
 package com.example.glesgameengine.GameSystem;
 
-import com.example.glesgameengine.GraphicSystem.GLView;
+import com.example.glesgameengine.GraphicSystem.GL.GLView;
 import com.example.glesgameengine.Types.Vector;
 
-public class Camera
-{
+public class Camera {
+
     public Vector position = new Vector();
     public float angle = 0;
     private Vector zoom = new Vector(1, 1);

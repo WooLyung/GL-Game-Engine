@@ -3,19 +3,19 @@ package com.example.glesgameengine.GameSystem.GameObject;
 import com.example.glesgameengine.GameSystem.Component.Component;
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.TransformComponent;
-import com.example.glesgameengine.GraphicSystem.GLRenderer;
+import com.example.glesgameengine.Main.Game;
 
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
 
-abstract public class GameObject
-{
+abstract public class GameObject {
+
     protected RendererComponent renderer;
     protected TransformComponent transform;
     private ArrayList<Component> components = new ArrayList<Component>();
-    private String tag = null;
-    private String name = null;
+    private String tag = "";
+    private String name = "";
     private GameObject parent = null;
     private ArrayList<GameObject> childs = new ArrayList<GameObject>();
 
@@ -35,8 +35,7 @@ abstract public class GameObject
         this.name = name;
     }
 
-    public GameObject()
-    {
+    public GameObject() {
         start();
     }
 
@@ -48,42 +47,37 @@ abstract public class GameObject
         return transform;
     }
 
-    public void appendChild(GameObject child)
-    {
+    public void appendChild(GameObject child) {
         childs.add(child);
         child.parent = this;
     }
 
-    public void setParent(GameObject parent)
-    {
+    public void setParent(GameObject parent) {
         parent.appendChild(this);
     }
 
-    public void removeParent()
-    {
-        parent.childs.remove(this);
-        parent = null;
+    public void removeParent() {
+        if (parent != null) {
+            parent.childs.remove(this);
+            parent = null;
+        }
     }
 
-    public void removeChild(GameObject child)
-    {
+    public void removeChild(GameObject child) {
         child.removeParent();
     }
 
-    public void attachComponent(Component newComponent)
-    {
+    public void attachComponent(Component newComponent) {
         components.add(newComponent);
         newComponent.object = this;
 
         if (newComponent.getName() == "spriteRenderer"
-            || newComponent.getName() == "animationRenderer")
-        {
+            || newComponent.getName() == "animationRenderer") {
             renderer = (RendererComponent) newComponent;
         }
 
         if (newComponent.getName() == "transform"
-            || newComponent.getName() == "GUITransform")
-        {
+            || newComponent.getName() == "GUITransform") {
             transform = (TransformComponent) newComponent;
         }
     }
@@ -96,12 +90,9 @@ abstract public class GameObject
         return parent;
     }
 
-    public Component getComponent(String componentName)
-    {
-        for (Component component : components)
-        {
-            if (component.getName().equals(componentName))
-            {
+    public Component getComponent(String componentName) {
+        for (Component component : components) {
+            if (component.getName().equals(componentName)) {
                 return component;
             }
         }
@@ -111,35 +102,34 @@ abstract public class GameObject
 
     abstract public void start();
 
-    public void update()
-    {
-        for (Component component : components)
-        {
+    public void update() {
+        for (Component component : components) {
             component.update();
         }
 
-        for (GameObject child : childs)
-        {
+        for (GameObject child : childs) {
             child.update();
         }
     }
 
-    public void render(GL10 gl)
-    {
+    public void render(GL10 gl) {
         if (renderer != null)
             renderer.render(gl);
     }
 
-    public void finish()
-    {
-        for (Component component : components)
-        {
+    public void finish() {
+        for (Component component : components) {
             component.finish();
         }
 
-        for (GameObject child : childs)
-        {
+        for (GameObject child : childs) {
             child.finish();
         }
+    }
+
+    public void destroy() {
+        removeParent();
+        Game.engine.nowScene.objs.remove(this);
+        finish();
     }
 }

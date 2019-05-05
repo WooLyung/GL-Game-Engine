@@ -1,13 +1,13 @@
-package com.example.glesgameengine.GraphicSystem;
+package com.example.glesgameengine.GraphicSystem.GL;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
-import android.util.Log;
 
-import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
+import com.example.glesgameengine.GraphicSystem.ImageData;
+import com.example.glesgameengine.GraphicSystem.RenderTarget;
 import com.example.glesgameengine.Main.Game;
 import com.example.glesgameengine.R;
 
@@ -17,18 +17,16 @@ import java.util.Comparator;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL10;
 
-public class GLRenderer implements GLSurfaceView.Renderer
-{
+public class GLRenderer implements GLSurfaceView.Renderer {
+
     public static ArrayList<RenderTarget> renderTargets;
     public static ArrayList<ImageData> imageDatas;
     public static int[] imageCode = new int[100];
     private Context context;
 
     // 이미지에 대한 정보를 저장
-    private void addImage(int image, String name)
-    {
+    private void addImage(int image, String name) {
         ImageData imgData = new ImageData();
         imgData.setName(name);
         imgData.setImgCode(image);
@@ -36,8 +34,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
     }
 
     // 이미지 정보 목록에서 이름에 해당하는 이미지의 인덱스값을 반환
-    public static int findImage(String name)
-    {
+    public static int findImage(String name) {
         int index = 0;
 
         for (ImageData imgData : imageDatas)
@@ -49,8 +46,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         return -1;
     }
 
-    public GLRenderer(Context context)
-    {
+    public GLRenderer(Context context) {
         // 변수 초기화
         imageDatas = new ArrayList<ImageData>();
         renderTargets = new ArrayList<RenderTarget>();
@@ -64,8 +60,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
     }
 
     @Override
-    public void onDrawFrame(GL10 gl)
-    {
+    public void onDrawFrame(GL10 gl) {
         // 렌더 버퍼를 지움
         gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
@@ -94,8 +89,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         });
 
         // 렌더링
-        for (RenderTarget renderTarget : renderTargets)
-        {
+        for (RenderTarget renderTarget : renderTargets) {
             // 행렬을 불러옴
             gl.glLoadIdentity();
             gl.glMultMatrixf(renderTarget.matrix);
@@ -129,14 +123,12 @@ public class GLRenderer implements GLSurfaceView.Renderer
     }
 
     @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height)
-    {
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
 
     }
 
     @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig arg1)
-    {
+    public void onSurfaceCreated(GL10 gl, EGLConfig arg1) {
         // 렌더러의 여러 값들을 초기화
         gl.glClearColor(1f, 1f, 1f, 0.5f);
         gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_FASTEST);
@@ -145,8 +137,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
         Bitmap bitmap;
 
-        for (int i = 0; i < imageDatas.size(); i++)
-        {
+        for (int i = 0; i < imageDatas.size(); i++) {
             // 이미지 정보 목록에 실제 이미지를 비트맵으로 저장
             gl.glBindTexture(GL10.GL_TEXTURE_2D, imageCode[i]);
             gl.glTexParameterx(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
@@ -165,8 +156,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
 
             // 이미지 정보의 버텍스 버퍼를 화면 크기와 이미지 크기에 맞도록 조절
             float[] vertices = imageDatas.get(i).getVertices();
-            for (int j = 0; j < vertices.length; j++)
-            {
+            for (int j = 0; j < vertices.length; j++) {
                 if (j % 2 == 0) {
                     //vertices[j] /= GLView.defaultWidth;
                     vertices[j] *= imageDatas.get(i).getHeight() / 100f;

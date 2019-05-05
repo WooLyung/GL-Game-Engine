@@ -2,8 +2,8 @@ package com.example.glesgameengine.GameSystem.Component.Components.TransformComp
 
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.TransformComponent;
 
-public class GUITransform extends TransformComponent
-{
+public class GUITransform extends TransformComponent {
+
     @Override
     public void start() {
         setName("GUITransform");

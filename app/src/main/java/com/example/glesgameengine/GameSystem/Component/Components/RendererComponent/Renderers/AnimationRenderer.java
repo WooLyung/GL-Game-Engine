@@ -1,27 +1,23 @@
-package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers;
 
-import android.util.Log;
-
-import com.example.glesgameengine.GraphicSystem.GLRenderer;
-import com.example.glesgameengine.GraphicSystem.GLView;
+import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
+import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.RenderTarget;
 import com.example.glesgameengine.Main.Game;
 
 import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
-import javax.microedition.khronos.opengles.GL10;
 import javax.microedition.khronos.opengles.GL11;
 
-public class AnimationRenderer extends RendererComponent
-{
+public class AnimationRenderer extends RendererComponent {
+
     private float interval = 1;
     private int nowFrame = 0;
     private float lapse = 0;
 
     @Override
-    public void render(GL10 gl)
-    {
+    public void render(GL10 gl) {
         super.render(gl);
 
         // 렌더 타겟을 추가
@@ -38,14 +34,12 @@ public class AnimationRenderer extends RendererComponent
     }
 
     @Override
-    public void start()
-    {
+    public void start() {
         setName("animationRenderer");
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
         // 이미지 프레임 변경
         lapse += Game.deltaTime;
         if (lapse >= interval)
@@ -56,13 +50,11 @@ public class AnimationRenderer extends RendererComponent
     }
 
     @Override
-    public void finish()
-    {
+    public void finish() {
 
     }
 
-    public void bindingImage(int[] image)
-    {
+    public void bindingImage(int[] image) {
         this.image = image;
         nowFrame = 0;
         lapse = 0;

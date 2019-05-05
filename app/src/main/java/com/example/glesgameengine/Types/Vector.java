@@ -1,18 +1,16 @@
 package com.example.glesgameengine.Types;
 
-public class Vector
-{
+public class Vector {
+
     public float x;
     public float y;
 
-    public Vector(float x, float y)
-    {
+    public Vector(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public Vector()
-    {
+    public Vector() {
         this.x = 0;
         this.y = 0;
     }

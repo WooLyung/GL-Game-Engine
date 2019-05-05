@@ -4,38 +4,32 @@ import com.example.glesgameengine.GameSystem.Scene.*;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class Engine
-{
+public class Engine {
+
     public Scene nowScene;
 
-    public Engine()
-    {
+    public Engine() {
         changeScene(new TestScene());
         start();
     }
 
-    public void start()
-    {
+    public void start() {
 
     }
 
-    public void update()
-    {
+    public void update() {
         nowScene.update();
     }
 
-    public void render(GL10 gl)
-    {
+    public void render(GL10 gl) {
         nowScene.render(gl);
     }
 
-    public void finish()
-    {
+    public void finish() {
 
     }
 
-    public void changeScene(Scene newScene)
-    {
+    public void changeScene(Scene newScene) {
         if (nowScene != null)
             nowScene.finish();
         nowScene = newScene;

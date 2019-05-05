@@ -6,16 +6,14 @@ import com.example.glesgameengine.Main.Game;
 
 import javax.microedition.khronos.opengles.GL10;
 
-public class TestScene extends Scene
-{
+public class TestScene extends Scene {
+
     @Override
-    public void start()
-    {
+    public void start() {
         TestObject t1 = new TestObject();
         TestObject t2;
 
-        for (int i = 0; i < 15; i++)
-        {
+        for (int i = 0; i < 15; i++) {
             objs.add(t1);
             t1.getRenderer().setZ_index(i);
             t2 = t1;
@@ -29,22 +27,19 @@ public class TestScene extends Scene
     }
 
     @Override
-    public void update()
-    {
+    public void update() {
         super.update();
 
         camera.angle += Game.deltaTime * 30;
     }
 
     @Override
-    public void finish()
-    {
+    public void finish() {
 
     }
 
     @Override
-    public void render(GL10 gl)
-    {
+    public void render(GL10 gl) {
         super.render(gl);
     }
 }

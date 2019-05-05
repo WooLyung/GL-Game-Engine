@@ -7,8 +7,8 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-public class ImageData
-{
+public class ImageData {
+
     private String name;
     private int imgCode;
     private int width;
@@ -36,8 +36,7 @@ public class ImageData
             1, 1,
             0, 1};
 
-    public ImageData()
-    {
+    public ImageData() {
         // 버텍스 버퍼, 이미지의 모양에 대한 정보
         ByteBuffer byteBuf = ByteBuffer.allocateDirect(vertices.length * 4);
         byteBuf.order(ByteOrder.nativeOrder());
