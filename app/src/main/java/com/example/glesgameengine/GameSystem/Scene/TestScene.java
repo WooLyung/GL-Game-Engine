@@ -17,12 +17,13 @@ public class TestScene extends Scene
         for (int i = 0; i < 15; i++)
         {
             objs.add(t1);
+            t1.getRenderer().setZ_index(i);
             t2 = t1;
             t1 = new TestObject();
 
             t2.appendChild(t1);
         }
-        
+
         objs.add(new TestObject2());
         camera.position.x = 1.5f;
     }

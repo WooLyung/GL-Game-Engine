@@ -75,7 +75,8 @@ abstract public class GameObject
         components.add(newComponent);
         newComponent.object = this;
 
-        if (newComponent.getName() == "spriteRenderer")
+        if (newComponent.getName() == "spriteRenderer"
+            || newComponent.getName() == "animationRenderer")
         {
             renderer = (RendererComponent) newComponent;
         }

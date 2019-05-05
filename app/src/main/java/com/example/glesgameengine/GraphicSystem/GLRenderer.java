@@ -60,6 +60,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         addImage(R.drawable.image, "img1");
         addImage(R.drawable.test1, "img2");
         addImage(R.drawable.circle2, "circle");
+        addImage(R.drawable.circle, "circle2");
     }
 
     @Override
@@ -88,7 +89,7 @@ public class GLRenderer implements GLSurfaceView.Renderer
         Collections.sort(renderTargets, new Comparator<RenderTarget>() {
             @Override
             public int compare(RenderTarget t1, RenderTarget t2) {
-                return (t1.z_index - t2.z_index) > 0 ? 1 : -1;
+                return t1.z_index - t2.z_index;
             }
         });
 
