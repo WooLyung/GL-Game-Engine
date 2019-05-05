@@ -31,6 +31,8 @@ public class TestScene extends Scene {
         super.update();
 
         camera.angle += Game.deltaTime * 30;
+        camera.setZoomX(camera.getZoomX() - (Game.deltaTime * 0.01f));
+        camera.setZoomY(camera.getZoomY() - (Game.deltaTime * 0.01f));
     }
 
     @Override

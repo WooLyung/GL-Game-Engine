@@ -25,7 +25,7 @@ abstract public class RendererComponent extends Component {
             // transform 컴포넌트가 GUI용 transform일 경우 절대적인 위치 사용
             gl.glLoadIdentity();
             gl.glTranslatef(object.getTransform().position.x / (float)GLView.defaultWidth, object.getTransform().position.y / (float)GLView.defaultHeight, getZ_index() / 100.f);
-            gl.glScalef(object.getTransform().scale.x * Game.engine.nowScene.camera.getZoomX() / (float)GLView.defaultWidth, object.getTransform().scale.y * Game.engine.nowScene.camera.getZoomY() / (float)GLView.defaultHeight, 1);
+            gl.glScalef(object.getTransform().scale.x / (float)GLView.defaultWidth, object.getTransform().scale.y / (float)GLView.defaultHeight, 1);
             gl.glRotatef(object.getTransform().angle, 0, 0, 1);
         }
         gl.glPushMatrix();

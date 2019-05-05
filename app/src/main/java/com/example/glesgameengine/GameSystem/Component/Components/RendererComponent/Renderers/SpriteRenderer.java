@@ -41,4 +41,8 @@ public class SpriteRenderer extends RendererComponent {
     @Override
     public void finish() {
     }
+
+    public void bindingImage(int image) {
+        this.image[0] = image;
+    }
 }

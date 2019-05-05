@@ -1,13 +1,17 @@
 package com.example.glesgameengine.Main;
 
 import android.graphics.Point;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
+import com.example.glesgameengine.R;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
 import java.net.URISyntaxException;
@@ -17,21 +21,28 @@ import io.socket.client.Socket;
 public class Game extends AppCompatActivity {
 
     Socket socket;
-    GLView view;
     GLRenderer renderer;
     Thread thread;
     String TAG = "MainActivity";
+    GLView view;
 
+    public ConstraintLayout mainView;
     public static long preTime;
 
+    public static Game instance;
     public static Engine engine;
     public static int screenWidth;
     public static int screenHeight;
     public static float deltaTime;
     public static double screenDiagonal;
 
+    public Game() {
+        instance = this;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         // 시간 초기화
         preTime = System.currentTimeMillis();
 
@@ -62,7 +73,11 @@ public class Game extends AppCompatActivity {
         thread = new Thread(new MainLoop()); // 게임이 돌아가는 스레드
         engine = new Engine(); // 게임의 전반적인 부분을 총괄하는 엔진
 
-        setContentView(view);
+        // 뷰 설정
+        setContentView(R.layout.activity_main);
+        mainView = findViewById(R.id.main);
+        mainView.addView(view);
+
         thread.start(); // 게임 스레드 시작
     }
 

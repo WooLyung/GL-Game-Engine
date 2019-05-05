@@ -13,7 +13,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity android:name=".Main.Game">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

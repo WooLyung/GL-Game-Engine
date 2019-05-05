@@ -158,11 +158,9 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             float[] vertices = imageDatas.get(i).getVertices();
             for (int j = 0; j < vertices.length; j++) {
                 if (j % 2 == 0) {
-                    //vertices[j] /= GLView.defaultWidth;
                     vertices[j] *= imageDatas.get(i).getHeight() / 100f;
                 }
                 else {
-                    //vertices[j] /= GLView.defaultHeight;
                     vertices[j] *= imageDatas.get(i).getWidth() / 100f;
                 }
             }
