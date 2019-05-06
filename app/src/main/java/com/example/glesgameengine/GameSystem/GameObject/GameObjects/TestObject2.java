@@ -1,19 +1,14 @@
 package com.example.glesgameengine.GameSystem.GameObject.GameObjects;
 
 import android.graphics.Color;
-import android.os.Handler;
-import android.support.annotation.ColorInt;
-import android.util.Log;
-import android.view.View;
 
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
-import com.example.glesgameengine.Input;
+import com.example.glesgameengine.GameIO.Input.Input;
 import com.example.glesgameengine.Main.Game;
-import com.example.glesgameengine.R;
 
 public class TestObject2 extends GameObject {
 

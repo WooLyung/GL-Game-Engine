@@ -2,11 +2,6 @@ package com.example.glesgameengine.GraphicSystem.GL;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-
-import com.example.glesgameengine.Input;
 
 public class GLView extends GLSurfaceView {
     public static double defaultWidth;

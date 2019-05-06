@@ -1,20 +1,19 @@
 package com.example.glesgameengine.Main;
 
 import android.graphics.Point;
+import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 
+import com.example.glesgameengine.GameIO.Output.SoundPlayer;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
-import com.example.glesgameengine.Input;
+import com.example.glesgameengine.GameIO.Input.Input;
 import com.example.glesgameengine.R;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
@@ -45,6 +44,15 @@ public class Game extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        // 사운드 테스트
+        SoundPlayer.PlaySound(this, R.raw.test, 1f);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SoundPlayer.PlaySound(getApplicationContext(), R.raw.test, 1f);
+            }
+        }, 1000);
 
         // 시간 초기화
         preTime = System.currentTimeMillis();
@@ -78,6 +86,7 @@ public class Game extends AppCompatActivity {
         mainView.addView(view);
 
         thread.start(); // 게임 스레드 시작
+
     }
 
     @Override

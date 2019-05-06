@@ -1,7 +1,7 @@
 package com.example.glesgameengine.Main;
 
 import com.example.glesgameengine.GameSystem.Scene.*;
-import com.example.glesgameengine.Input;
+import com.example.glesgameengine.GameIO.Input.Input;
 
 import javax.microedition.khronos.opengles.GL10;
 
