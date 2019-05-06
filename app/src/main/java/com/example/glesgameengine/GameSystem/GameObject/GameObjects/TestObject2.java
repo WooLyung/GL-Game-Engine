@@ -11,6 +11,7 @@ import com.example.glesgameengine.GameSystem.Component.Components.RendererCompon
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
+import com.example.glesgameengine.Input;
 import com.example.glesgameengine.Main.Game;
 import com.example.glesgameengine.R;
 
@@ -44,6 +45,13 @@ public class TestObject2 extends GameObject {
         if (time > 0.4f) {
             time = 0;
             ((TextRenderer)getComponent("textRenderer")).setText(Game.deltaTime + "");
+        }
+
+        if (getParent() == null) {
+            if (Input.getTouchState() == Input.TOUCH_STATE.STAY
+                    || Input.getTouchState() == Input.TOUCH_STATE.DOWN) {
+                transform.position = Input.getTouchUIPos();
+            }
         }
     }
 

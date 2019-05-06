@@ -1,6 +1,9 @@
 package com.example.glesgameengine.Main;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GameSystem.Scene.*;
+import com.example.glesgameengine.Input;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -19,6 +22,7 @@ public class Engine {
 
     public void update() {
         nowScene.update();
+        Input.update();
     }
 
     public void render(GL10 gl) {

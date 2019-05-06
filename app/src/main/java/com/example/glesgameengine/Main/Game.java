@@ -5,12 +5,16 @@ import android.support.constraint.ConstraintLayout;
 import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
+import com.example.glesgameengine.Input;
 import com.example.glesgameengine.R;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
@@ -96,5 +100,30 @@ public class Game extends AppCompatActivity {
             throw new Error(e);
         }
         socket.emit("messageName", jsonObject); //이벤트네임, 데이터(JSONObject - json 포멧 데이터)*/
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            Input.isDown = false;
+        }
+        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Input.isDown = true;
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+
+        return super.onTouchEvent(event);
     }
 }

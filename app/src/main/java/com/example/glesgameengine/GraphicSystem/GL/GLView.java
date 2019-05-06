@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import com.example.glesgameengine.Input;
+
 public class GLView extends GLSurfaceView
 {
     public static double defaultWidth;
@@ -19,19 +21,5 @@ public class GLView extends GLSurfaceView
         setRenderer(renderer);
         setRenderMode(RENDERMODE_CONTINUOUSLY);
         setFocusableInTouchMode(true);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        Log.i("event","onKeyDown");
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        Log.i("event","onTouchEvent");
-        return super.onTouchEvent(event);
     }
 }
