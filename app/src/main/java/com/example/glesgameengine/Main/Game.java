@@ -1,19 +1,20 @@
 package com.example.glesgameengine.Main;
 
 import android.graphics.Point;
-import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
+import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.WindowManager;
 
-import com.example.glesgameengine.GameIO.Output.SoundPlayer;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
-import com.example.glesgameengine.GameIO.Input.Input;
+import com.example.glesgameengine.Input;
 import com.example.glesgameengine.R;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 
@@ -26,6 +27,7 @@ public class Game extends AppCompatActivity {
     Socket socket;
     GLRenderer renderer;
     Thread thread;
+    String TAG = "MainActivity";
     GLView view;
 
     public ConstraintLayout mainView;
@@ -45,19 +47,14 @@ public class Game extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
-        // 사운드 테스트
-        SoundPlayer.PlaySound(this, R.raw.test, 1f);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                SoundPlayer.PlaySound(getApplicationContext(), R.raw.test, 1f);
-            }
-        }, 1000);
-
         // 시간 초기화
         preTime = System.currentTimeMillis();
 
-        startSocketCommunication();
+        try { // socketio로 서버 연결
+            socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
+        } catch (URISyntaxException e) { // 서버 주소 문법 오류시
+            e.printStackTrace();
+        }
 
         super.onCreate(savedInstanceState); // 조명 항상켜기
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -86,30 +83,6 @@ public class Game extends AppCompatActivity {
         mainView.addView(view);
 
         thread.start(); // 게임 스레드 시작
-
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            Input.isDown = false;
-        }
-        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Input.isDown = true;
-            Input.touchPos.x = event.getX();
-            Input.touchPos.y = event.getY();
-        }
-        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            Input.touchPos.x = event.getX();
-            Input.touchPos.y = event.getY();
-        }
-
-        return super.onTouchEvent(event);
     }
 
     private void startSocketCommunication() {
@@ -127,5 +100,30 @@ public class Game extends AppCompatActivity {
             throw new Error(e);
         }
         socket.emit("messageName", jsonObject); //이벤트네임, 데이터(JSONObject - json 포멧 데이터)*/
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            Input.isDown = false;
+        }
+        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Input.isDown = true;
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+
+        return super.onTouchEvent(event);
     }
 }

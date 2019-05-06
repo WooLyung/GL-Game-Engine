@@ -1,4 +1,6 @@
-package com.example.glesgameengine.GameIO.Input;
+package com.example.glesgameengine;
+
+import android.util.Log;
 
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
 import com.example.glesgameengine.Main.Game;
