@@ -1,10 +1,5 @@
 package com.example.glesgameengine.Main;
 
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.widget.TextView;
-
 public class MainLoop implements Runnable {
 
     @Override

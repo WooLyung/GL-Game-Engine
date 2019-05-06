@@ -27,7 +27,6 @@ public class Game extends AppCompatActivity {
     Socket socket;
     GLRenderer renderer;
     Thread thread;
-    String TAG = "MainActivity";
     GLView view;
 
     public ConstraintLayout mainView;
@@ -50,11 +49,7 @@ public class Game extends AppCompatActivity {
         // 시간 초기화
         preTime = System.currentTimeMillis();
 
-        try { // socketio로 서버 연결
-            socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
-        } catch (URISyntaxException e) { // 서버 주소 문법 오류시
-            e.printStackTrace();
-        }
+        startSocketCommunication();
 
         super.onCreate(savedInstanceState); // 조명 항상켜기
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -85,6 +80,29 @@ public class Game extends AppCompatActivity {
         thread.start(); // 게임 스레드 시작
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_UP) {
+            Input.isDown = false;
+        }
+        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            Input.isDown = true;
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            Input.touchPos.x = event.getX();
+            Input.touchPos.y = event.getY();
+        }
+
+        return super.onTouchEvent(event);
+    }
+
     private void startSocketCommunication() {
         try { // socketio로 서버 연결
             socket = new SocketIOBuilder("http://omok-server.run.goorm.io").getSocket();
@@ -100,30 +118,5 @@ public class Game extends AppCompatActivity {
             throw new Error(e);
         }
         socket.emit("messageName", jsonObject); //이벤트네임, 데이터(JSONObject - json 포멧 데이터)*/
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event)
-    {
-        return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        if (event.getAction() == MotionEvent.ACTION_UP) {
-            Input.isDown = false;
-        }
-        else if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Input.isDown = true;
-            Input.touchPos.x = event.getX();
-            Input.touchPos.y = event.getY();
-        }
-        else if (event.getAction() == MotionEvent.ACTION_MOVE) {
-            Input.touchPos.x = event.getX();
-            Input.touchPos.y = event.getY();
-        }
-
-        return super.onTouchEvent(event);
     }
 }

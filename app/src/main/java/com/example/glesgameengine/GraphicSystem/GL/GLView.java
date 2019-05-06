@@ -8,8 +8,7 @@ import android.view.MotionEvent;
 
 import com.example.glesgameengine.Input;
 
-public class GLView extends GLSurfaceView
-{
+public class GLView extends GLSurfaceView {
     public static double defaultWidth;
     public static double defaultHeight;
     public static double nowWidth;
