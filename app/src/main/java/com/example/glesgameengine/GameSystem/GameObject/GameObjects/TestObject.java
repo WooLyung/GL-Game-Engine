@@ -4,7 +4,6 @@ import com.example.glesgameengine.GameSystem.Component.Components.RendererCompon
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.Transform;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GameSystem.GameObject.GameObject;
-import com.example.glesgameengine.Input;
 
 public class TestObject extends GameObject {
 

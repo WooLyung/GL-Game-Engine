@@ -2,19 +2,16 @@ package com.example.glesgameengine.Main;
 
 import android.graphics.Point;
 import android.support.constraint.ConstraintLayout;
-import android.support.constraint.Constraints;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.WindowManager;
 
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
-import com.example.glesgameengine.Input;
+import com.example.glesgameengine.GameIO.Input;
 import com.example.glesgameengine.R;
 import com.example.glesgameengine.SocketIO.SocketIOBuilder;
 

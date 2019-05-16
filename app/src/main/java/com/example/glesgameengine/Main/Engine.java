@@ -1,9 +1,7 @@
 package com.example.glesgameengine.Main;
 
-import android.util.Log;
-
 import com.example.glesgameengine.GameSystem.Scene.*;
-import com.example.glesgameengine.Input;
+import com.example.glesgameengine.GameIO.Input;
 
 import javax.microedition.khronos.opengles.GL10;
 
