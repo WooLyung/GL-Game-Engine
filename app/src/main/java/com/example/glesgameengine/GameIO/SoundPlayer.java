@@ -1,4 +1,4 @@
-package com.example.glesgameengine.GameIO.Output;
+package com.example.glesgameengine.GameIO;
 
 import android.content.Context;
 import android.media.AudioAttributes;
