@@ -43,9 +43,20 @@ public class TestObject2 extends GameObject {
         }
 
         if (getParent() == null) {
-            if (Input.getTouchState() == Input.TOUCH_STATE.STAY
-                    || Input.getTouchState() == Input.TOUCH_STATE.DOWN) {
-                transform.position = Input.getTouchUIPos();
+            for (int i = 3; i >= -1; i--) {
+                if (i == -1) {
+                    if (Input.getTouchState() == Input.TOUCH_STATE.STAY
+                            || Input.getTouchState() == Input.TOUCH_STATE.DOWN) {
+                        transform.position = Input.getTouchUIPos();
+                    }
+                }
+                else {
+                    if (Input.getTouchState(i) == Input.TOUCH_STATE.STAY
+                            || Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
+                        transform.position = Input.getTouchUIPos(i);
+                        break;
+                    }
+                }
             }
         }
     }
