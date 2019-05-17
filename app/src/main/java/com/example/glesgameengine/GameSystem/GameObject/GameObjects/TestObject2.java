@@ -1,8 +1,10 @@
 package com.example.glesgameengine.GameSystem.GameObject.GameObjects;
 
 import android.graphics.Color;
+import android.widget.EditText;
 
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.AnimationRenderer;
+import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.EditTextRenderer;
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.TextRenderer;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.Transforms.GUITransform;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
@@ -11,8 +13,6 @@ import com.example.glesgameengine.GameIO.Input;
 import com.example.glesgameengine.Main.Game;
 
 public class TestObject2 extends GameObject {
-
-    float time = 0;
 
     @Override
     public void start() {
@@ -35,12 +35,6 @@ public class TestObject2 extends GameObject {
     @Override
     public void update() {
         super.update();
-        time += Game.deltaTime;
-
-        if (time > 0.4f) {
-            time = 0;
-            ((TextRenderer)getComponent("textRenderer")).setText(Game.deltaTime + "");
-        }
 
         if (getParent() == null) {
             for (int i = 3; i >= -1; i--) {

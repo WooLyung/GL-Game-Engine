@@ -1,19 +1,15 @@
 package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers;
 
-import android.graphics.Color;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import com.example.glesgameengine.GameSystem.Component.Component;
 import com.example.glesgameengine.GraphicSystem.GL.GLView;
 import com.example.glesgameengine.Main.Game;
-import com.example.glesgameengine.Main.MainLoop;
 
-public class TextRenderer extends Component {
+public class EditTextRenderer extends Component {
 
     private String text = "";
-    private TextView textView;
+    private EditText editText;
     private float nowX = 99999;
     private float nowY = 99999;
     private float nowWidth = 99999;
@@ -24,9 +20,9 @@ public class TextRenderer extends Component {
 
     @Override
     public void start() {
-        setName("textRenderer");
+        setName("editTextRenderer");
 
-        textView = new TextView(Game.instance);
+        editText = new EditText(Game.instance);
         setText("text");
     }
 
@@ -35,24 +31,22 @@ public class TextRenderer extends Component {
 
         if (isExist == false) {
             if (Game.instance.mainView != null) {
-                Game.instance.mainView.addView(textView);
+                Game.instance.mainView.addView(editText);
                 isExist = true;
             }
         }
         else {
             Game.instance.runOnUiThread(new Runnable() {
                 public void run() {
-                    textView.setText(textView.getText());
-
-                    if (nowX != object.getTransform().position.x || nowWidth != textView.getMeasuredWidth()) {
+                    if (nowX != object.getTransform().position.x || nowWidth != editText.getMeasuredWidth()) {
                         nowX = object.getTransform().position.x;
-                        nowWidth = textView.getMeasuredWidth();
-                        textView.setX(Game.screenWidth / 2 + Game.screenWidth * object.getTransform().position.x / (float)GLView.defaultWidth / 2 - ((isCenterWidth) ? textView.getMeasuredWidth() / 2 : 0));
+                        nowWidth = editText.getMeasuredWidth();
+                        editText.setX(Game.screenWidth / 2 + Game.screenWidth * object.getTransform().position.x / (float)GLView.defaultWidth / 2 - ((isCenterWidth) ? editText.getMeasuredWidth() / 2 : 0));
                     }
-                    if (nowY != object.getTransform().position.y || nowHeight != textView.getMeasuredHeight()) {
+                    if (nowY != object.getTransform().position.y || nowHeight != editText.getMeasuredHeight()) {
                         nowY = object.getTransform().position.y;
-                        nowHeight = textView.getMeasuredHeight();
-                        textView.setY(Game.screenHeight / 2 - Game.screenHeight * object.getTransform().position.y / (float)GLView.defaultHeight / 2 - ((isCenterHeight) ? textView.getMeasuredHeight() / 2 : 0));
+                        nowHeight = editText.getMeasuredHeight();
+                        editText.setY(Game.screenHeight / 2 - Game.screenHeight * object.getTransform().position.y / (float)GLView.defaultHeight / 2 - ((isCenterHeight) ? editText.getMeasuredHeight() / 2 : 0));
                     }
                 }
             });
@@ -62,7 +56,7 @@ public class TextRenderer extends Component {
     @Override
     public void finish() {
         if (isExist == true)
-            Game.instance.mainView.removeView(textView);
+            Game.instance.mainView.removeView(editText);
     }
 
     public String getText() {
@@ -74,13 +68,13 @@ public class TextRenderer extends Component {
 
         Game.instance.runOnUiThread(new Runnable() {
             public void run() {
-            	textView.setText(text);
+            	editText.setText(text);
             }
         });
     }
 
-    public TextView getTextView() {
-        return textView;
+    public EditText getEditText() {
+        return editText;
     }
 
     public boolean getIsCenterWidth() {
