@@ -11,6 +11,9 @@ import javax.microedition.khronos.opengles.GL11;
 
 public class SpriteRenderer extends RendererComponent {
 
+    private float fill = 1;
+    private DIRECTION dir = DIRECTION.RIGHT;
+
     @Override
     public void render(GL10 gl) {
         super.render(gl);
@@ -21,6 +24,8 @@ public class SpriteRenderer extends RendererComponent {
         renderTarget.matrix = FloatBuffer.allocate(4 * 9);
         ((GL11)gl).glGetFloatv(GL11.GL_MODELVIEW_MATRIX, renderTarget.matrix);
         renderTarget.z_index = getZ_index();
+        renderTarget.fill = getFill();
+        renderTarget.dir = getDir();
         GLRenderer.renderTargets.add(renderTarget);
 
         // 렌더 타겟 추가 마무리
@@ -44,5 +49,21 @@ public class SpriteRenderer extends RendererComponent {
 
     public void bindingImage(int image) {
         this.image[0] = image;
+    }
+
+    public float getFill() {
+        return fill;
+    }
+
+    public void setFill(float fill) {
+        this.fill = fill;
+    }
+
+    public void setDir(DIRECTION dir) {
+        this.dir = dir;
+    }
+
+    public DIRECTION getDir() {
+        return dir;
     }
 }

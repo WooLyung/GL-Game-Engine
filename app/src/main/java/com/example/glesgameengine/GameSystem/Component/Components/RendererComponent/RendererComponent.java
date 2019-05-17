@@ -11,6 +11,9 @@ abstract public class RendererComponent extends Component {
 
     public int[] image;
     private int z_index = 0;
+    public enum DIRECTION {
+        UP, DOWN, RIGHT, LEFT
+    }
 
     public void render(GL10 gl) {
         if (object.getTransform().getName() == "transform") {

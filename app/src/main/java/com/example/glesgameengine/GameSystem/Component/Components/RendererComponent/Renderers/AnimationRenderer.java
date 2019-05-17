@@ -15,6 +15,8 @@ public class AnimationRenderer extends RendererComponent {
     private float interval = 1;
     private int nowFrame = 0;
     private float lapse = 0;
+    private float fill = 1;
+    private DIRECTION dir = DIRECTION.RIGHT;
 
     @Override
     public void render(GL10 gl) {
@@ -26,6 +28,8 @@ public class AnimationRenderer extends RendererComponent {
         renderTarget.matrix = FloatBuffer.allocate(4 * 9);
         ((GL11)gl).glGetFloatv(GL11.GL_MODELVIEW_MATRIX, renderTarget.matrix);
         renderTarget.z_index = getZ_index();
+        renderTarget.fill = getFill();
+        renderTarget.dir = getDir();
         GLRenderer.renderTargets.add(renderTarget);
 
         // 렌더 타겟 추가 마무리
@@ -74,5 +78,21 @@ public class AnimationRenderer extends RendererComponent {
 
     public int getNowFrame() {
         return nowFrame;
+    }
+
+    public float getFill() {
+        return fill;
+    }
+
+    public void setFill(float fill) {
+        this.fill = fill;
+    }
+
+    public void setDir(DIRECTION dir) {
+        this.dir = dir;
+    }
+
+    public DIRECTION getDir() {
+        return dir;
     }
 }
