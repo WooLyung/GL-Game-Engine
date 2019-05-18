@@ -1,8 +1,4 @@
-package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent;
-
-import com.example.glesgameengine.GameSystem.GameObject.GameObject;
-
-import java.util.ArrayList;
+package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses;
 
 public class AnimationState {
     private AnimationStateElement rot, posX, posY, scaleX, scaleY;

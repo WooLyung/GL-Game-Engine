@@ -16,13 +16,15 @@ abstract public class Scene {
 
     public void update() {
         for (GameObject gameObject : objs) {
-            gameObject.update();
+            if (gameObject.getIsActive())
+                gameObject.update();
         }
     }
 
     public void render(GL10 gl) {
         for (GameObject gameObject : objs) {
-            gameObject.render(gl);
+            if (gameObject.getIsActive() && (gameObject.getRenderer() == null || gameObject.getRenderer().getIsVisible()))
+                gameObject.render(gl);
         }
     }
 

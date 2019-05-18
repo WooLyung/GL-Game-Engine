@@ -20,6 +20,7 @@ abstract public class GameObject {
     private String name = "";
     private GameObject parent = null;
     private ArrayList<GameObject> childs = new ArrayList<GameObject>();
+    private boolean isActive = true;
 
     public String getTag() {
         return tag;
@@ -49,6 +50,14 @@ abstract public class GameObject {
         return transform;
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public void appendChild(GameObject child) {
         childs.add(child);
         child.parent = this;
@@ -75,11 +84,9 @@ abstract public class GameObject {
         }
 
         for (GameObject child : childs) {
-            if (child.getChilds().size() != 0) {
-                GameObject foundObj = child.findOfName(name);
-                if (foundObj != null)
-                    return foundObj;
-            }
+            GameObject foundObj = child.findOfName(name);
+            if (foundObj != null)
+                return foundObj;
         }
 
         return null;

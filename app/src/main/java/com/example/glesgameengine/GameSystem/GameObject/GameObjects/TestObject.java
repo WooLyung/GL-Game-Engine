@@ -21,6 +21,7 @@ public class TestObject extends GameObject {
         transform.scale.y = 0.9f;
 
         ((SpriteRenderer)renderer).setDir(RendererComponent.DIRECTION.RIGHT);
+        setIsActive(false);
     }
 
     @Override

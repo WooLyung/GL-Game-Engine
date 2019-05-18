@@ -3,8 +3,13 @@ package com.example.glesgameengine.GraphicSystem.GL;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Log;
 
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
@@ -168,7 +173,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                 }
 
                 for (int i = 0; i < 8; i++) {
-                    vertex[i] += ((i % 2 == 1) ? renderTarget.anchor.y : renderTarget.anchor.x - 0.5f) * 2;
+                    vertex[i] += ((i % 2 == 1) ? (renderTarget.anchor.y - 0.5f) : (renderTarget.anchor.x - 0.5f)) * 2;
                     vertex[i] *= (i % 2 == 1) ? GLRenderer.imageDatas.get(renderTarget.imageCode).getHeight() : GLRenderer.imageDatas.get(renderTarget.imageCode).getWidth();
                     vertex[i] /= 100f;
                 }

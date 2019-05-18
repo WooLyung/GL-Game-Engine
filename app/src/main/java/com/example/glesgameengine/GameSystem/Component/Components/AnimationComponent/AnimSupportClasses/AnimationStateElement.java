@@ -1,4 +1,4 @@
-package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses;
 
 public class AnimationStateElement {
     private float time = 0;

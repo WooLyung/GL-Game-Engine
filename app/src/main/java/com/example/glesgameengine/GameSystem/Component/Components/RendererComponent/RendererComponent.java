@@ -10,9 +10,18 @@ import javax.microedition.khronos.opengles.GL10;
 abstract public class RendererComponent extends Component {
 
     public int[] image;
+    private boolean isVisible = true;
     private int z_index = 0;
     public enum DIRECTION {
         UP, DOWN, RIGHT, LEFT
+    }
+
+    public void setIsVisible(boolean isVisible) {
+        this.isVisible = isVisible;
+    }
+
+    public boolean getIsVisible() {
+        return isVisible;
     }
 
     public void render(GL10 gl) {

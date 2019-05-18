@@ -1,9 +1,5 @@
 package com.example.glesgameengine.GameSystem.GameObject.GameObjects;
 
-import android.content.res.AssetManager;
-import android.content.res.Resources;
-import android.view.animation.Animation;
-
 import com.example.glesgameengine.GameIO.Input;
 import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimationComponent;
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers.SpriteRenderer;
@@ -13,12 +9,13 @@ import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.Main.Game;
 import com.example.glesgameengine.R;
 
-import java.io.InputStream;
-
-public class Stick extends GameObject {
+public class Body extends GameObject {
     @Override
     public void start() {
-        setName("part1");
+        appendChild(new FrontLeg1());
+        appendChild(new BackLeg1());
+
+        setName("body");
 
         SpriteRenderer spriteRenderer = new SpriteRenderer();
         attachComponent(spriteRenderer);
@@ -26,14 +23,10 @@ public class Stick extends GameObject {
 
         Transform transform = new Transform();
         attachComponent(transform);
-        transform.anchor.x = 0;
-        transform.anchor.y = 0;
 
         AnimationComponent animationComponent = new AnimationComponent();
         attachComponent(animationComponent);
-        animationComponent.addAnimation(Game.instance.getString(R.string.testAnim));
-
-        setIsActive(false);
+        animationComponent.addAnimation(Game.instance.getString(R.string.walk));
     }
 
     @Override

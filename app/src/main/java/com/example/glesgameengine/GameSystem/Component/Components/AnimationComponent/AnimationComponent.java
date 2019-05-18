@@ -3,8 +3,12 @@ package com.example.glesgameengine.GameSystem.Component.Components.AnimationComp
 import android.util.Log;
 
 import com.example.glesgameengine.GameSystem.Component.Component;
+import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.Animation;
+import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.AnimationData;
+import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.AnimationDataElement;
+import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.AnimationState;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.TransformComponent;
-import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimationStateElement;
+import com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses.AnimationStateElement;
 import com.example.glesgameengine.Main.Game;
 
 import org.json.JSONArray;
@@ -283,31 +287,33 @@ public class AnimationComponent extends Component {
     }
 
     public void stop() {
-        Animation nowAnimation = animations.get(nowAnim);
+        if (nowAnim != -1) {
+            Animation nowAnimation = animations.get(nowAnim);
 
-        for (int i = 0; i < nowAnimation.getAnimationDatas().size(); i++) {
-            AnimationData animationData = nowAnimation.getAnimationDatas().get(i);
+            for (int i = 0; i < nowAnimation.getAnimationDatas().size(); i++) {
+                AnimationData animationData = nowAnimation.getAnimationDatas().get(i);
 
-            if (animationData.getRot() != null) {
-                animationData.getObj().getTransform().angle = animationData.getRot().get(0).getStart();
+                if (animationData.getRot() != null) {
+                    animationData.getObj().getTransform().angle = animationData.getRot().get(0).getStart();
+                }
+                if (animationData.getPosX() != null) {
+                    animationData.getObj().getTransform().position.x = animationData.getPosX().get(0).getStart();
+                }
+                if (animationData.getPosY() != null) {
+                    animationData.getObj().getTransform().position.y = animationData.getPosY().get(0).getStart();
+                }
+                if (animationData.getScaleX() != null) {
+                    animationData.getObj().getTransform().scale.x = animationData.getScaleX().get(0).getStart();
+                }
+                if (animationData.getScaleY() != null) {
+                    animationData.getObj().getTransform().scale.y = animationData.getScaleY().get(0).getStart();
+                }
             }
-            if (animationData.getPosX() != null) {
-                animationData.getObj().getTransform().position.x = animationData.getPosX().get(0).getStart();
+
+            for (int i = 0; i < animations.size(); i++) {
+                animations.get(i).stop();
             }
-            if (animationData.getPosY() != null) {
-                animationData.getObj().getTransform().position.y = animationData.getPosY().get(0).getStart();
-            }
-            if (animationData.getScaleX() != null) {
-                animationData.getObj().getTransform().scale.x = animationData.getScaleX().get(0).getStart();
-            }
-            if (animationData.getScaleY() != null) {
-                animationData.getObj().getTransform().scale.y = animationData.getScaleY().get(0).getStart();
-            }
+            nowAnim = -1;
         }
-
-        for (int i = 0; i < animations.size(); i++) {
-            animations.get(i).stop();
-        }
-        nowAnim = -1;
     }
 }

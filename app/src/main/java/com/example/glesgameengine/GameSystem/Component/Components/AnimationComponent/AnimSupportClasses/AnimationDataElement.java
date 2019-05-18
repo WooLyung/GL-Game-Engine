@@ -1,4 +1,4 @@
-package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent;
+package com.example.glesgameengine.GameSystem.Component.Components.AnimationComponent.AnimSupportClasses;
 
 public class AnimationDataElement {
     private float start, end, time;

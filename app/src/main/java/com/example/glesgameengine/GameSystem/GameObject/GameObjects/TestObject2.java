@@ -19,17 +19,15 @@ public class TestObject2 extends GameObject {
         AnimationRenderer animationRenderer = new AnimationRenderer();
         animationRenderer.bindingImage(new int[]{ GLRenderer.findImage("circle"), GLRenderer.findImage("circle2") });
 
-        TextRenderer textRenderer = new TextRenderer();
-        textRenderer.getTextView().setBackgroundColor(Color.GRAY);
-
         attachComponent(new GUITransform());
         attachComponent(animationRenderer);
-        attachComponent(textRenderer);
         renderer.image[0] = GLRenderer.findImage("circle");
         transform.position.x = 2;
         transform.position.y = 4;
 
         getRenderer().setZ_index(-1);
+
+        renderer.setIsVisible(false);
     }
 
     @Override
