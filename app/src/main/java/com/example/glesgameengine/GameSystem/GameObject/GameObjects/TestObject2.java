@@ -35,24 +35,6 @@ public class TestObject2 extends GameObject {
     @Override
     public void update() {
         super.update();
-
-        if (getParent() == null) {
-            for (int i = 3; i >= -1; i--) {
-                if (i == -1) {
-                    if (Input.getTouchState() == Input.TOUCH_STATE.STAY
-                            || Input.getTouchState() == Input.TOUCH_STATE.DOWN) {
-                        transform.position = Input.getTouchUIPos();
-                    }
-                }
-                else {
-                    if (Input.getTouchState(i) == Input.TOUCH_STATE.STAY
-                            || Input.getTouchState(i) == Input.TOUCH_STATE.DOWN) {
-                        transform.position = Input.getTouchUIPos(i);
-                        break;
-                    }
-                }
-            }
-        }
     }
 
     @Override

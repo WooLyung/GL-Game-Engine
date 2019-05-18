@@ -1,5 +1,7 @@
 package com.example.glesgameengine.GameSystem.GameObject;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GameSystem.Component.Component;
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.GameSystem.Component.Components.TransformComponent.TransformComponent;
@@ -65,6 +67,22 @@ abstract public class GameObject {
 
     public void removeChild(GameObject child) {
         child.removeParent();
+    }
+
+    public GameObject findOfName(String name) {
+        if (getName().equals(name)) {
+            return this;
+        }
+
+        for (GameObject child : childs) {
+            if (child.getChilds().size() != 0) {
+                GameObject foundObj = child.findOfName(name);
+                if (foundObj != null)
+                    return foundObj;
+            }
+        }
+
+        return null;
     }
 
     public void attachComponent(Component newComponent) {

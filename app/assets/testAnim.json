@@ -1,6 +1,3 @@
-<resources>
-    <string name="app_name">GLES Game Engine</string>
-    <string name="testAnim">
 [{"name":"part1",
   "rot":[{
     "start":0,
@@ -27,8 +24,6 @@
   }, {
     "start":-3,
     "end":0,
-    "time":4
+    "time":2
   }]
 }]
-    </string>
-</resources>
