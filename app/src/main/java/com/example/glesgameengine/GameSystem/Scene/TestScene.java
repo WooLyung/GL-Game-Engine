@@ -1,5 +1,6 @@
 package com.example.glesgameengine.GameSystem.Scene;
 
+import com.example.glesgameengine.GameSystem.GameObject.GameObjects.Stick;
 import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject;
 import com.example.glesgameengine.GameSystem.GameObject.GameObjects.TestObject2;
 import com.example.glesgameengine.Main.Game;
@@ -12,6 +13,7 @@ public class TestScene extends Scene {
     public void start() {
         objs.add(new TestObject());
         objs.add(new TestObject2());
+        objs.add(new Stick());
         camera.position.x = 3;
     }
 

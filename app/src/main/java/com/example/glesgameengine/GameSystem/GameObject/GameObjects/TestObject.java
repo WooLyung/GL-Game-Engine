@@ -13,7 +13,7 @@ public class TestObject extends GameObject {
     public void start() {
         attachComponent(new Transform());
         attachComponent(new SpriteRenderer());
-        renderer.image[0] = GLRenderer.findImage("circle");
+        renderer.image[0] = GLRenderer.findImage("img1");
         renderer.setZ_index(1);
 
         transform.position.x = 1.5f;

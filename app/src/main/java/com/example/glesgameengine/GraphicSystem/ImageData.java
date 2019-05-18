@@ -1,6 +1,7 @@
 package com.example.glesgameengine.GraphicSystem;
 
 import android.media.Image;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.util.Log;
 
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.GraphicSystem.ImageData;
@@ -61,6 +62,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         addImage(R.drawable.test1, "img2");
         addImage(R.drawable.circle2, "circle");
         addImage(R.drawable.circle, "circle2");
+        addImage(R.drawable.stick, "stick");
     }
 
     @Override
@@ -101,7 +103,7 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             gl.glEnable(GL10.GL_BLEND);
 
             // 버텍스, 텍스쳐, 컬러, 인덱스 버퍼를 적용시킴
-            if (renderTarget.fill == 1) { // fill에 따라 버텍스 버퍼를 조정
+            if (renderTarget.fill == 1 && renderTarget.anchor.x == 0.5f && renderTarget.anchor.y == 0.5f) { // fill과 앵커에 따라 버텍스 조절
                 gl.glVertexPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getVertexBuffer());
                 gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, GLRenderer.imageDatas.get(renderTarget.imageCode).getTextureBuffer());
             }
@@ -163,6 +165,12 @@ public class GLRenderer implements GLSurfaceView.Renderer {
                             1, 1,
                             0, 1
                     };
+                }
+
+                for (int i = 0; i < 8; i++) {
+                    vertex[i] += ((i % 2 == 1) ? renderTarget.anchor.y : renderTarget.anchor.x - 0.5f) * 2;
+                    vertex[i] *= (i % 2 == 1) ? GLRenderer.imageDatas.get(renderTarget.imageCode).getHeight() : GLRenderer.imageDatas.get(renderTarget.imageCode).getWidth();
+                    vertex[i] /= 100f;
                 }
 
                 // 버퍼 설정
@@ -243,10 +251,10 @@ public class GLRenderer implements GLSurfaceView.Renderer {
             float[] vertices = imageDatas.get(i).getVertices();
             for (int j = 0; j < vertices.length; j++) {
                 if (j % 2 == 0) {
-                    vertices[j] *= imageDatas.get(i).getHeight() / 100f;
+                    vertices[j] *= imageDatas.get(i).getWidth() / 100f;
                 }
                 else {
-                    vertices[j] *= imageDatas.get(i).getWidth() / 100f;
+                    vertices[j] *= imageDatas.get(i).getHeight() / 100f;
                 }
             }
             imageDatas.get(i).setVertices(vertices);
