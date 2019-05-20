@@ -19,6 +19,10 @@ public class TestScene extends Scene {
     @Override
     public void update() {
         super.update();
+
+        camera.angle += Game.deltaTime * 90;
+        camera.setZoomY(0.25f);
+        camera.setZoomX(0.25f);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.RenderTarget;
@@ -17,6 +19,7 @@ public class AnimationRenderer extends RendererComponent {
     private float lapse = 0;
     private float fill = 1;
     private DIRECTION dir = DIRECTION.RIGHT;
+    private boolean isFlip = false;
 
     @Override
     public void render(GL10 gl) {
@@ -91,6 +94,14 @@ public class AnimationRenderer extends RendererComponent {
 
     public void setDir(DIRECTION dir) {
         this.dir = dir;
+    }
+
+    public void setIsFlip(boolean isFlip) {
+        this.isFlip = isFlip;
+    }
+
+    public boolean getIsFlip() {
+        return isFlip;
     }
 
     public DIRECTION getDir() {

@@ -37,7 +37,7 @@ public class Body extends GameObject {
             ((AnimationComponent)getComponent("animationComponent")).play(0);
         }
         else if (Input.getTouchState(1) == Input.TOUCH_STATE.DOWN) {
-            ((AnimationComponent)getComponent("animationComponent")).stop();
+            ((SpriteRenderer)getComponent("spriteRenderer")).setIsFlip(true);
         }
     }
 

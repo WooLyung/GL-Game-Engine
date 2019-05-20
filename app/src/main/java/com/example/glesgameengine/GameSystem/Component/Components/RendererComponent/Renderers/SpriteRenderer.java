@@ -1,5 +1,7 @@
 package com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.Renderers;
 
+import android.util.Log;
+
 import com.example.glesgameengine.GameSystem.Component.Components.RendererComponent.RendererComponent;
 import com.example.glesgameengine.GraphicSystem.GL.GLRenderer;
 import com.example.glesgameengine.GraphicSystem.RenderTarget;
@@ -11,6 +13,7 @@ import javax.microedition.khronos.opengles.GL11;
 
 public class SpriteRenderer extends RendererComponent {
 
+    private boolean isFlip = false;
     private float fill = 1;
     private DIRECTION dir = DIRECTION.RIGHT;
 
@@ -62,6 +65,14 @@ public class SpriteRenderer extends RendererComponent {
 
     public void setDir(DIRECTION dir) {
         this.dir = dir;
+    }
+
+    public void setIsFlip(boolean isFlip) {
+        this.isFlip = isFlip;
+    }
+
+    public boolean getIsFlip() {
+        return isFlip;
     }
 
     public DIRECTION getDir() {
