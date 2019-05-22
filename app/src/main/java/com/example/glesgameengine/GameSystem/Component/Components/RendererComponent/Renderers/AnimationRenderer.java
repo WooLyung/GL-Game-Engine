@@ -20,6 +20,7 @@ public class AnimationRenderer extends RendererComponent {
     private float fill = 1;
     private DIRECTION dir = DIRECTION.RIGHT;
     private boolean isFlip = false;
+    private boolean loop = true;
 
     @Override
     public void render(GL10 gl) {
@@ -52,7 +53,8 @@ public class AnimationRenderer extends RendererComponent {
         lapse += Game.deltaTime;
         if (lapse >= interval)
         {
-            nowFrame = (nowFrame + 1) % image.length;
+            nowFrame = (nowFrame + 1);
+            if (loop) nowFrame %= image.length;
             lapse -= interval;
         }
     }
@@ -102,6 +104,14 @@ public class AnimationRenderer extends RendererComponent {
 
     public boolean getIsFlip() {
         return isFlip;
+    }
+
+    public boolean getLoop() {
+        return loop;
+    }
+
+    public void setLoop(boolean loop) {
+        this.loop = loop;
     }
 
     public DIRECTION getDir() {
